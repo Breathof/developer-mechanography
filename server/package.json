@@ -4,6 +4,7 @@
   "description": "Server-side app for the developer mechanograpy website",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -30,5 +31,14 @@
   "bugs": {
     "url": "https://github.com/Breathof/developer-mechanography/issues"
   },
-  "homepage": "https://github.com/Breathof/developer-mechanography#readme"
+  "homepage": "https://github.com/Breathof/developer-mechanography#readme",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "mongoose": "^5.9.7",
+    "nodemon": "^2.0.3",
+    "yargs": "^15.3.1"
+  }
 }
