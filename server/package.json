@@ -1,0 +1,34 @@
+{
+  "name": "developer-mechanograpghy-server",
+  "version": "1.0.0",
+  "description": "Server-side app for the developer mechanograpy website",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Breathof/developer-mechanography.git"
+  },
+  "keywords": [
+    "node",
+    "mechanography",
+    "developer",
+    "javascript",
+    "csharp",
+    "cpp",
+    "java",
+    "c",
+    "python",
+    "ruby",
+    "keyboard",
+    "skill",
+    "skills"
+  ],
+  "author": "Clovis Zanetti",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Breathof/developer-mechanography/issues"
+  },
+  "homepage": "https://github.com/Breathof/developer-mechanography#readme"
+}
