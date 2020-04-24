@@ -8,7 +8,7 @@ app.listen(process.env.PORT, (err, resp) => {
     console.log(`Server start on port ${process.env.PORT}`)
 });
 
-app.use(cors())
+app.use(cors());
 
 const LanguageController = require('./controller/languageController');
 
@@ -41,4 +41,4 @@ app.get('/index.js', (req, res) => {
         res.write(response);
         res.end();
     });
-})
+});

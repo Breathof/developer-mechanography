@@ -1,0 +1,25 @@
+.full-width {
+  width: 100%;
+  align-self: center;
+}
+
+input {
+  font-size: large;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-basis: 80%;
+  font-size: small;
+  .typo {
+    flex-basis: 50%;
+    font-size: 2em;
+  }
+}
+
+.reset-button {
+  font-size: 2em;
+}
