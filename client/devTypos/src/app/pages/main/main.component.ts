@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WordsPerMinute } from '../../models/wpm';
 import { LanguageControllerService } from '../../services/language-controller.service';
+import { Word } from 'src/app/models/word';
 
 @Component({
   selector: 'app-main',
@@ -12,7 +13,9 @@ export class MainComponent implements OnInit {
   wpm: WordsPerMinute = new WordsPerMinute();
   typedWord: string;
   wordList: string[] = new Array<string>();
-
+  started = false;
+  timeLeft: number = 60;
+  wordIndex: number = 0;
   constructor(private languageController: LanguageControllerService) { }
 
   ngOnInit(): void {
@@ -20,6 +23,9 @@ export class MainComponent implements OnInit {
       console.log('Server: ', result);
       this.wpm.wordList = result;
       this.wordList = this.wpm.wordList;
+
+      this.wpm.init();
+      console.log(this.wpm.firstRowWordList);
     });
 
   }
@@ -27,24 +33,35 @@ export class MainComponent implements OnInit {
   checkWord(event: any) {
     let word = this.typedWord.trim();
     if (this.typedWord != ' ') {
-
-      console.log(word);
-
-      let actualWord: string;
-      actualWord = this.wpm.wordList.shift();
-      if (word === actualWord) {
-        this.wpm.correctWords.unshift(actualWord);
+      let actualWord: Word = new Word("");
+      actualWord = (this.wpm.firstRowWordList[this.wordIndex]);
+      this.wordIndex++;
+      if (word === actualWord.word) {
+        this.wpm.correctWords.unshift(actualWord.word);
+        actualWord.setCorrect();
       } else {
-        this.wpm.errorWords.unshift(actualWord);
+        this.wpm.errorWords.unshift(actualWord.word);
+        actualWord.setError();
       }
     }
     this.typedWord = '';
-    console.log('Corrects: ', this.wpm.correctWords.length);
-    console.log('Errors: ', this.wpm.errorWords.length);
+
+    this.wordList.shift();
+    console.log(this.wpm.firstRowWordList);
+
+    if (!this.started)
+      this.initialize();
+  }
+
+  initialize() {
+    this.started = true;
   }
 
   reset() {
 
   }
 
+  setResult() {
+
+  }
 }

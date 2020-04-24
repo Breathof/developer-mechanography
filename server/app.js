@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
     fs.readFile('../client/devTypos/dist/devTypos/index.html', (err, response) => {
         if (err) {
             console.log(err)
-            throw new Error(err)
+            // throw new Error(err)
         }
         res.write(response);
         res.end();
@@ -40,7 +40,7 @@ app.get('/:id', (req, res) => {
     fs.readFile(`../client/devTypos/dist/devTypos/${req.params.id}`, (err, response) => {
         if (err) {
             console.log(err)
-            throw new Error(err)
+            // throw new Error(err)
         }
         // var charset = mime.charsets.lookup(type);
         // res.setHeader('Content-Type', type + (charset ? '; charset=' + charset : ''));

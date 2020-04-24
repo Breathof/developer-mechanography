@@ -18,11 +18,38 @@ input {
     flex-basis: 50%;
     font-size: 2em;
   }
-  .word-list {
-    flex: auto;
+}
+
+.word-list {
+  flex: auto;
+  word-break: break-all;
+  font-size: 1.8em;
+
+  p {
+    margin: 0.5em;
+  }
+  // word-wrap: break-all;
+  // max-width: 50px;
+}
+
+.second-word-list {
+  flex: auto;
+  word-break: break-all;
+  font-size: 1.5em;
+
+  p {
+    margin: 0.4em;
   }
 }
 
 .reset-button {
   font-size: 2em;
+}
+
+.danger {
+  color: #ff3d00;
+}
+
+.sucessful {
+  color: #4caf50;
 }

@@ -10,7 +10,15 @@
     </button>
   </div>
 
-  <!-- <div class="word-list">
-    <p>{{wordList}}</p>
-  </div> -->
+</div>
+
+<div class="container word-list">
+  <div *ngFor="let word of wpm.firstRowWordList">
+    <p *ngIf="word.getError()" [ngClass]="(word.getError()) ? 'danger' : ''">{{word.word}}</p>
+    <p *ngIf="word.getCorrect()" [ngClass]="(word.getCorrect()) ? 'sucessful' : ''">{{word.word}}</p>
+    <p *ngIf="!word.getError() && !word.getCorrect()">{{word.word}}</p>
+  </div>
+</div>
+<div class="container second-word-list">
+  <p *ngFor="let word of wpm.secondRowWordList">{{word.word}}</p>
 </div>
