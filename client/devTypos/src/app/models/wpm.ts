@@ -1,7 +1,7 @@
 export class WordsPerMinute {
-  public wordList: string[];
-  public correctWords: string[];
-  public errorWords: string[];
+  public wordList: string[] = new Array<string>();
+  public correctWords: string[] = new Array<string>();
+  public errorWords: string[] = new Array<string>();
   public minutes: number = 1;
   public wpm: number;
 
