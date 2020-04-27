@@ -31,12 +31,17 @@ export class MainComponent implements OnInit {
   }
 
   checkWord(event: any) {
-    let word = this.typedWord.trim();
+    this.updateList(this.isEqualWords());
+    if (!this.started) {
+      this.initialize();
+    }
+    this.updateIndex();
+  }
+
+  private updateList(areWordsEquial: boolean) {
+    let actualWord: Word = this.getActualWord();
     if (this.typedWord != ' ') {
-      let actualWord: Word = new Word("");
-      actualWord = (this.wpm.firstRowWordList[this.wordIndex]);
-      this.wordIndex++;
-      if (word === actualWord.word) {
+      if (areWordsEquial) {
         this.wpm.correctWords.unshift(actualWord.word);
         actualWord.setCorrect();
       } else {
@@ -44,14 +49,30 @@ export class MainComponent implements OnInit {
         actualWord.setError();
       }
     }
-    this.typedWord = '';
 
-    this.wordList.shift();
-    console.log(this.wpm.firstRowWordList);
-
-    if (!this.started)
-      this.initialize();
+    console.log(this.wordIndex, this.wpm.firstRowWordList.length - 1)
+    if (this.wordIndex === this.wpm.firstRowWordList.length - 1) {
+      this.wpm.setRowLists(false);
+      this.wordIndex = -1;
+    }
+    this.resetTypedWordAndWordList();
   }
+
+  private resetTypedWordAndWordList = () => { this.typedWord = ''; this.wordList.shift(); }
+
+  private isEqualWords(): boolean {
+    if (this.typedWord != ' ') {
+      return this.getTypedWord() === this.getActualWord()?.word;
+    } else {
+      return false;
+    }
+  }
+
+  private getActualWord = () => this.wpm.firstRowWordList[this.wordIndex];
+
+  private getTypedWord = () => this.typedWord.trim();
+
+  private updateIndex = () => this.wordIndex = ++this.wordIndex;
 
   initialize() {
     this.started = true;

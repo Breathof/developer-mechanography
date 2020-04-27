@@ -1,5 +1,6 @@
 import { Word } from './word';
 export class WordsPerMinute {
+  public rowLength = 40;
   public wordList: string[] = new Array<string>();
   public firstRowWordList: Word[] = new Array<Word>();
   public secondRowWordList: Word[] = new Array<Word>();
@@ -14,19 +15,28 @@ export class WordsPerMinute {
     return (result / 5) / this.minutes;
   }
 
-  public setRowLists() {
+  public setRowLists(setFirstRow: boolean = true) {
     let lengthFirstRow = 0;
     let lengthSecondRow = 0;
-    let length = 80;
     let words = this.wordList;
-    while (lengthFirstRow < length) {
-      this.firstRowWordList.unshift(new Word(words.shift()));
-      lengthFirstRow += this.firstRowWordList[0].word.length;
+
+    if (setFirstRow) {
+      while (lengthFirstRow < this.rowLength) {
+        this.firstRowWordList.unshift(new Word(words.shift()));
+        lengthFirstRow += this.firstRowWordList[0].word.length;
+      }
+    } else {
+      this.firstRowWordList = new Array<Word>();
+      this.secondRowWordList.forEach(x =>
+        this.firstRowWordList.push(new Word(x.word))
+      );
     }
-    while (lengthSecondRow < length) {
+    this.secondRowWordList = new Array<Word>();
+    while (lengthSecondRow < this.rowLength) {
       this.secondRowWordList.unshift(new Word(words.shift()));
       lengthSecondRow += this.secondRowWordList[0].word.length;
     }
+
   }
 
   public shuffle() {
