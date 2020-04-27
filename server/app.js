@@ -23,32 +23,45 @@ app.get('/js', (req, res) => {
     }
 });
 
-app.get('/', (req, res) => {
+const getInitPage = app.get('/', (req, res) => {
+
     let html;
     fs.readFile('../client/devTypos/dist/devTypos/index.html', (err, response) => {
         if (err) {
             console.log(err)
             // throw new Error(err)
+            return err;
         }
         res.write(response);
         res.end();
     });
+
 });
 
-app.get('/:id', (req, res) => {
-    let html;
-    fs.readFile(`../client/devTypos/dist/devTypos/${req.params.id}`, (err, response) => {
-        if (err) {
-            console.log(err)
-            // throw new Error(err)
-        }
-        // var charset = mime.charsets.lookup(type);
-        // res.setHeader('Content-Type', type + (charset ? '; charset=' + charset : ''));
-        res.write(response);
-        res.end();
-    });
-});
+// app.get('/:id', (req, res) => {
+//     try {
+//         fs.readFile(`../client/devTypos/dist/devTypos/${req.params.id}`, (err, response) => {
+//             if (err) {
+//                 console.log(err)
+//                 return err
+//             }
+//             if (response) {
+//                 res.write(response);
+//             } else {
+//                 getInitPage();
+//             }
+//             res.end();
+//         });
 
+//     } catch (error) {
+//         console.error(error);
+//     }
+// });
+
+app.all('*', (req, res) => {
+    console.log(`[TRACE] Server 404 request: ${req.originalUrl}`);
+    res.status(200).sendFile(path.join(__dirname, '../client/devTypos/dist/devTypos/index.html'));
+});
 
 app.get('/index.js', (req, res) => {
     let html;
