@@ -1,15 +1,21 @@
 <div class="container">
+  <div *ngIf="finished" class="timmer">
+    {{resultWpm}}
+  </div>
   <div class="typo">
     <mat-form-field class="full-width">
-      <input [(ngModel)]="typedWord" class="typo" matInput type="text" (keyup.Space)="checkWord($event)">
+      <input #mainInput [(ngModel)]="typedWord" class="typo" matInput type="text" (keyup)="initialize()"
+        (keyup.Space)="checkWord($event)">
     </mat-form-field>
   </div>
   <div class="reset-button">
-    <button mat-icon-button aria-label="Example icon-button with a heart icon">
+    <button mat-icon-button aria-label="Example icon-button with a heart icon" (click)="reset()">
       <mat-icon>refresh</mat-icon>
     </button>
   </div>
-
+  <div class="timer">
+    {{count}}
+  </div>
 </div>
 
 <div class="container word-list">

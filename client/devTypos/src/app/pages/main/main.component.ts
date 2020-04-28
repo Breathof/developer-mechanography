@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { WordsPerMinute } from '../../models/wpm';
 import { LanguageControllerService } from '../../services/language-controller.service';
 import { Word } from 'src/app/models/word';
+import { Observable, timer } from 'rxjs';
+import { take, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main',
@@ -14,8 +16,15 @@ export class MainComponent implements OnInit {
   typedWord: string;
   wordList: string[] = new Array<string>();
   started = false;
-  timeLeft: number = 60;
+  finished = false;
+  count: number = 60;
   wordIndex: number = 0;
+  startDate: Date;
+  counter: Observable<number>;
+  resultWpm: string = '';
+
+  @ViewChild('mainInput') mainInput: ElementRef;
+
   constructor(private languageController: LanguageControllerService) { }
 
   ngOnInit(): void {
@@ -27,13 +36,18 @@ export class MainComponent implements OnInit {
       this.wpm.init();
       console.log(this.wpm.firstRowWordList);
     });
+  }
 
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.mainInput.nativeElement.focus();
+    }, 0);
   }
 
   checkWord(event: any) {
     this.updateList(this.isEqualWords());
     if (!this.started) {
-      this.initialize();
+      // this.initialize();
     }
     this.updateIndex();
   }
@@ -75,14 +89,33 @@ export class MainComponent implements OnInit {
   private updateIndex = () => this.wordIndex = ++this.wordIndex;
 
   initialize() {
+    if (!this.started) {
+      this.startDate = new Date();
+      this.countTimeLeft();
+    }
     this.started = true;
   }
 
-  reset() {
+  countTimeLeft = () => {
+    this.counter = timer(0, 1000).pipe(
+      take(this.count),
+      map(() => --this.count)
+    );
 
+    this.counter.subscribe(() => {
+      if (this.count == 0) {
+        this.setResult();
+      }
+    })
+  }
+
+  reset() {
+    location.reload();
   }
 
   setResult() {
-
+    this.resultWpm = 'WPM: ' + this.wpm.getWpm();
+    console.log(this.resultWpm);
+    this.finished = true;
   }
 }

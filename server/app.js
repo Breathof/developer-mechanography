@@ -23,8 +23,7 @@ app.get('/js', (req, res) => {
     }
 });
 
-const getInitPage = app.get('/', (req, res) => {
-
+app.get('/', (req, res) => {
     let html;
     fs.readFile('../client/devTypos/dist/devTypos/index.html', (err, response) => {
         if (err) {
