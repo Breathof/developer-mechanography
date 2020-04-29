@@ -1,1 +1,20 @@
-<p>landing works!</p>
+<div class="container">
+
+  <div class="lederboard">
+    LeaderBoard
+  </div>
+
+</div>
+<div class="container">
+  <mat-list>
+    <mat-list-item *ngFor="let userScore of userScores">
+      <div class="user-name">
+        {{userScore.userName}}:
+      </div>
+      <div class="wpm">
+        {{userScore.wpm}}
+      </div>
+      <br>
+    </mat-list-item>
+  </mat-list>
+</div>

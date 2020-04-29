@@ -1,0 +1,35 @@
+.full-width {
+  width: 100%;
+  align-self: center;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-basis: 80%;
+  font-size: small;
+  .typo {
+    flex-basis: 50%;
+    font-size: 2em;
+  }
+}
+
+.lederboard {
+  // flex: auto;
+  align-items: center;
+  margin: 2rem;
+  font-size: 3em;
+}
+
+.user-name {
+  flex: auto;
+  font-size: 1.8em;
+}
+
+.wpm {
+  flex: auto;
+  font-size: 1.8em;
+}

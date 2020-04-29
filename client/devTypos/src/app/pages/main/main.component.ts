@@ -4,6 +4,7 @@ import { LanguageControllerService } from '../../services/language-controller.se
 import { Word } from 'src/app/models/word';
 import { Observable, timer } from 'rxjs';
 import { take, map } from 'rxjs/operators';
+import { UserServiceService } from '../../services/user-service.service';
 
 @Component({
   selector: 'app-main',
@@ -17,7 +18,7 @@ export class MainComponent implements OnInit {
   wordList: string[] = new Array<string>();
   started = false;
   finished = false;
-  count: number = 60;
+  count: number = 10;
   wordIndex: number = 0;
   startDate: Date;
   counter: Observable<number>;
@@ -25,9 +26,14 @@ export class MainComponent implements OnInit {
 
   @ViewChild('mainInput') mainInput: ElementRef;
 
-  constructor(private languageController: LanguageControllerService) { }
+  constructor(
+    private languageController: LanguageControllerService,
+    private userService: UserServiceService
+  ) { }
 
   ngOnInit(): void {
+    this.wpm = new WordsPerMinute();
+    this.wordList = new Array<string>();
     this.languageController.getJS().subscribe(result => {
       console.log('Server: ', result);
       this.wpm.wordList = result;
@@ -97,6 +103,7 @@ export class MainComponent implements OnInit {
   }
 
   countTimeLeft = () => {
+    this.count = 60;
     this.counter = timer(0, 1000).pipe(
       take(this.count),
       map(() => --this.count)
@@ -110,12 +117,24 @@ export class MainComponent implements OnInit {
   }
 
   reset() {
-    location.reload();
+    this.started = false;
+    this.finished = false;
+
+    this.ngOnInit();
+    // location.reload();
+
   }
 
   setResult() {
     this.resultWpm = 'WPM: ' + this.wpm.getWpm();
-    console.log(this.resultWpm);
     this.finished = true;
+
+    if (this.userService.getName() !== 'Unknown') {
+      console.log('SEND WPM')
+      this.userService.sendScore(this.wpm).subscribe(resp => {
+        console.log(resp)
+      });
+    }
+
   }
 }

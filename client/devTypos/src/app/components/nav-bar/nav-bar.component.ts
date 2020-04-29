@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserServiceService } from 'src/app/services/user-service.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor() { }
+  userName: string = 'Unknown';
+
+  constructor(private userService: UserServiceService) { }
 
   ngOnInit(): void {
   }
+
+  setUserName = (event) => {
+    this.userName = event.userName;
+    this.userService.setUserName(this.userName);
+    console.log(event);
+  }
+
 
 }

@@ -2,8 +2,9 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 const config = require('./config/config');
-var cors = require('cors');
-var path = require('path');
+const cors = require('cors');
+const path = require('path');
+const bodyParser = require('body-parser')
 
 app.listen(process.env.PORT, (err, resp) => {
     console.log(`Server start on port ${process.env.PORT}`)
@@ -11,8 +12,10 @@ app.listen(process.env.PORT, (err, resp) => {
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, '../client/devTypos/dist/devTypos')));
+app.use(bodyParser.json())
 
 const LanguageController = require('./controller/languageController');
+const LeaderBoardController = require('./controller/leaderBoardController');
 
 app.get('/js', (req, res) => {
     try {
@@ -22,6 +25,31 @@ app.get('/js', (req, res) => {
         console.error(error)
     }
 });
+
+app.get('/leaderBoard', (req, res) => {
+    try {
+        res.status = 200;
+        res.json(LeaderBoardController.getLeaderBoard());
+        // res.write(res);
+        console.log("Lederboard: ", LeaderBoardController.getLeaderBoard())
+        res.end();
+    } catch (error) {
+        console.error(error)
+    }
+});
+
+app.post('/userScore', (req, res) => {
+    try {
+        console.log('UserScore: ', req.body)
+        res.status = 200;
+        res.json(LeaderBoardController.updateLeaderBoard(req.body));
+        // res.write(res);
+        res.end();
+    } catch (error) {
+        console.error(error)
+    }
+});
+
 
 app.get('/', (req, res) => {
     let html;
