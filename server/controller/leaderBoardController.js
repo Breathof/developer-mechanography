@@ -12,6 +12,7 @@ const load = () => { leaderBoard = require('../data/leaderBoard.json') }
 
 const getLeaderBoard = () => {
     load();
+    leaderBoard = leaderBoard.sort((a, b) => a.wpm < b.wpm ? 1 : -1)
     return leaderBoard;
 }
 
@@ -23,6 +24,8 @@ const updateLeaderBoard = (json) => {
         if (err) console.log('error', err);
     });
 }
+
+
 
 module.exports = {
     getLeaderBoard,
