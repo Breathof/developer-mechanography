@@ -20,7 +20,7 @@ const LeaderBoardController = require('./controller/leaderBoardController');
 app.get('/js', (req, res) => {
     try {
         res.status = 200;
-        res.json(LanguageController.getLanguage());
+        res.json(LanguageController.getLanguage(200));
     } catch (error) {
         console.error(error)
     }

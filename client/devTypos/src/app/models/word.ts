@@ -7,12 +7,12 @@ export class Word {
     this.word = word;
   }
 
-  public setCorrect() {
-    this.isCorrect = true;
+  public setCorrect(value = true) {
+    this.isCorrect = value;
   }
 
-  public setError() {
-    this.isError = true;
+  public setError(value = true) {
+    this.isError = value;
   }
 
   getCorrect = () => this.isCorrect;
