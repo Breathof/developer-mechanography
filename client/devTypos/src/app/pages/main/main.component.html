@@ -5,7 +5,7 @@
   <div class="typo">
     <mat-form-field class="full-width">
       <input #mainInput [(ngModel)]="typedWord" class="typo" matInput type="text" (keyup)="initialize()"
-        (keyup)="checkWord($event)">
+        (keyup)="checkWord($event)" autocomplete="off">
     </mat-form-field>
   </div>
   <div class="reset-button">

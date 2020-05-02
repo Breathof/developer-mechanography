@@ -33,3 +33,16 @@
   flex: auto;
   font-size: 1.8em;
 }
+
+img {
+  max-width: 10em;
+  max-height: 10em;
+  // argin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.mat-card-image {
+  margin: 0px;
+}

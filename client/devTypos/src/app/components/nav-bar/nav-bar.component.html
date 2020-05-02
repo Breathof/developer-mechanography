@@ -1,10 +1,19 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="navbar">
+  <span routerLink="/" routerLinkActive="active"> DevTypo</span>
+
   <span routerLink="/main" routerLinkActive="active"> JavaScript</span>
+  <span routerLink="/main" routerLinkActive="active"> Python</span>
+  <span routerLink="/main" routerLinkActive="active"> Java</span>
+  <span routerLink="/main" routerLinkActive="active"> C#</span>
+  <span routerLink="/main" routerLinkActive="active"> Html</span>
+  <span routerLink="/main" routerLinkActive="active"> Css</span>
 
   <span class="example-fill-remaining-space"></span>
   <span>{{userName}}</span>
-  <form #userForm="ngForm" (ngSubmit)="setUserName(userForm.value)">
-    <input #userNameInput *ngIf="userName === 'Unknown'" type="userName" name="userName" ngModel>
-    <button *ngIf="userName === 'Unknown'" type="submit">Submit</button>
+  <form #userForm="ngForm" (ngSubmit)="setUserName(userForm.value)" *ngIf="userName === 'Unknown'">
+    <mat-form-field>
+      <input matInput #userNameInput type="userName" name="userName" autocomplete="off" ngModel>
+    </mat-form-field>
+    <button mat-flat-button *ngIf="userName === 'Unknown'" type="submit">Submit</button>
   </form>
 </mat-toolbar>

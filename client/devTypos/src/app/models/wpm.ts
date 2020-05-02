@@ -1,4 +1,5 @@
 import { Word } from './word';
+import { BrowserStack } from 'protractor/built/driverProviders';
 export class WordsPerMinute {
   public rowLength = 40;
   public wordList: string[] = new Array<string>();
@@ -23,7 +24,10 @@ export class WordsPerMinute {
     if (setFirstRow) {
       while (lengthFirstRow < this.rowLength) {
         this.firstRowWordList.unshift(new Word(words.shift()));
-        lengthFirstRow += this.firstRowWordList[0].word.length;
+        // if (this.firstRowWordList[0]) {
+        //   break;
+        // }
+        lengthFirstRow += this.firstRowWordList[0].word?.length;
       }
     } else {
       this.firstRowWordList = new Array<Word>();
@@ -33,10 +37,13 @@ export class WordsPerMinute {
     }
     this.secondRowWordList = new Array<Word>();
     while (lengthSecondRow < this.rowLength) {
+      console.log(this.secondRowWordList[0]?.word)
       this.secondRowWordList.unshift(new Word(words.shift()));
-      lengthSecondRow += this.secondRowWordList[0].word.length;
+      if (!this.secondRowWordList[0]) {
+        break;
+      }
+      lengthSecondRow += this.secondRowWordList[0].word?.length;
     }
-
   }
 
   public shuffle() {

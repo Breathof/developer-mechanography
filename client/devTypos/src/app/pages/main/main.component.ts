@@ -5,6 +5,7 @@ import { Word } from 'src/app/models/word';
 import { Observable, timer, Subscription } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 import { UserServiceService } from '../../services/user-service.service';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-main',
@@ -36,6 +37,7 @@ export class MainComponent implements OnInit {
     this.count = 60;
     this.wpm = new WordsPerMinute();
     this.wordList = new Array<string>();
+    this.wordIndex = 0;
     this.languageController.getJS().subscribe(result => {
       this.wpm.wordList = result;
       this.wordList = this.wpm.wordList;
@@ -51,21 +53,23 @@ export class MainComponent implements OnInit {
   }
 
   checkWord(event: any) {
-    if (event.code == "Space") {
-      if (this.typedWord !== " ") {
-        this.updateList(this.isEqualWords());
-        this.updateIndex();
+    if (!this.finished) {
+      if (event.code == "Space") {
+        if (this.typedWord !== " ") {
+          this.updateList(this.isEqualWords());
+          this.updateIndex();
+        } else {
+          this.typedWord = "";
+        }
       } else {
-        this.typedWord = "";
+        let actualWord = this.getActualWord();
+        const typedWord = this.getTypedWord();
+        const length = typedWord.length;
+        const error = typedWord === actualWord?.word?.slice(0, length);
+        error ?
+          actualWord.setError(false) :
+          actualWord.setError(true);
       }
-    } else {
-      let actualWord = this.getActualWord();
-      const typedWord = this.getTypedWord();
-      const length = typedWord.length;
-      const error = typedWord === actualWord?.word.slice(0, length);
-      error ?
-        actualWord.setError(false) :
-        actualWord.setError(true);
     }
   }
 
@@ -129,7 +133,8 @@ export class MainComponent implements OnInit {
 
     this.typedWord = '';
     this.ngOnInit();
-    this.counterSuscription.unsubscribe();
+
+    this.counterSuscription?.unsubscribe();
     this.mainInput.nativeElement.focus();
   }
 

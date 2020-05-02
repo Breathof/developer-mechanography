@@ -6,15 +6,55 @@
 
 </div>
 <div class="container">
-  <mat-list>
-    <mat-list-item *ngFor="let userScore of userScores">
-      <div class="user-name">
-        {{userScore.userName}}:
-      </div>
-      <div class="wpm">
-        {{userScore.wpm}}
-      </div>
-      <br>
-    </mat-list-item>
-  </mat-list>
+  <div id="js">
+    <mat-card>
+      <img mat-card-image src="../../../assets/images/js.png">
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item *ngFor="let userScore of userScores">
+            <div class="user-name">
+              {{userScore.userName}}:
+            </div>
+            <div class="wpm">
+              {{userScore.wpm}}
+            </div>
+            <br>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div id="py">
+    <mat-card>
+      <img mat-card-image src="../../../assets/images/python.png">
+      <mat-card-content></mat-card-content>
+    </mat-card>
+  </div>
+  <div id="java">
+    <mat-card>
+      <img mat-card-image src="../../../assets/images/java.webp">
+      <mat-card-content></mat-card-content>
+
+    </mat-card>
+  </div>
+  <div id="csharp">
+    <mat-card>
+      <img mat-card-image src="../../../assets/images/csharp.png">
+      <mat-card-content></mat-card-content>
+    </mat-card>
+  </div>
+  <div id="hmtl">
+    <mat-card>
+      <img mat-card-image src="../../../assets/images/html.png">
+      <mat-card-content></mat-card-content>
+    </mat-card>
+  </div>
+  <div id="css">
+    <mat-card>
+      <img mat-card-image src="../../../assets/images/css.png">
+      <mat-card-content></mat-card-content>
+    </mat-card>
+  </div>
+
 </div>
