@@ -37,13 +37,15 @@ export class WordsPerMinute {
     }
     this.secondRowWordList = new Array<Word>();
     while (lengthSecondRow < this.rowLength) {
-      console.log(this.secondRowWordList[0]?.word)
+      // console.log(this.secondRowWordList[0]?.word)
       this.secondRowWordList.unshift(new Word(words.shift()));
       if (!this.secondRowWordList[0]) {
         break;
       }
       lengthSecondRow += this.secondRowWordList[0].word?.length;
     }
+
+    this.firstRowWordList[0].setCurrent();
   }
 
   public shuffle() {

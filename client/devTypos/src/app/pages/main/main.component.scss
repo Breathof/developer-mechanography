@@ -1,3 +1,6 @@
+$danger: #ff3d00;
+$sucessful: #4caf50;
+
 .full-width {
   width: 100%;
   align-self: center;
@@ -56,4 +59,9 @@ input {
 
 .sucessful {
   color: #4caf50;
+}
+
+.current {
+  // background-color: darken($color: #ffff, $amount: 20%);
+  font-size: 1.2em;
 }

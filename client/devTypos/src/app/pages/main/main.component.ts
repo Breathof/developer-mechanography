@@ -58,6 +58,7 @@ export class MainComponent implements OnInit {
         if (this.typedWord !== " ") {
           this.updateList(this.isEqualWords());
           this.updateIndex();
+          this.getActualWord().setCurrent();
         } else {
           this.typedWord = "";
         }
@@ -90,7 +91,10 @@ export class MainComponent implements OnInit {
     this.resetTypedWordAndWordList();
   }
 
-  private resetTypedWordAndWordList = () => { this.typedWord = ''; this.wordList.shift(); }
+  private resetTypedWordAndWordList = () => {
+    this.typedWord = this.typedWord.split(" ")[1] === undefined ? '' : this.typedWord.split(" ")[1];
+    this.wordList.shift();
+  }
 
   private isEqualWords(): boolean {
     if (this.typedWord != ' ') {
@@ -102,7 +106,7 @@ export class MainComponent implements OnInit {
 
   private getActualWord = () => this.wpm.firstRowWordList[this.wordIndex];
 
-  private getTypedWord = () => this.typedWord.trim();
+  private getTypedWord = () => this.typedWord.split(" ")[0].trim();
 
   private updateIndex = () => this.wordIndex = ++this.wordIndex;
 
