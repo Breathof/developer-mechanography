@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { WordsPerMinute } from '../../models/wpm';
 import { LanguageControllerService } from '../../services/language-controller.service';
 import { Word } from 'src/app/models/word';
@@ -24,13 +25,15 @@ export class MainComponent implements OnInit {
   startDate: Date;
   counter: Observable<number>;
   resultWpm: string = '';
+  language = '';
 
   @ViewChild('mainInput') mainInput: ElementRef;
   counterSuscription: Subscription;
 
   constructor(
     private languageController: LanguageControllerService,
-    private userService: UserServiceService
+    private userService: UserServiceService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -38,11 +41,66 @@ export class MainComponent implements OnInit {
     this.wpm = new WordsPerMinute();
     this.wordList = new Array<string>();
     this.wordIndex = 0;
-    this.languageController.getJS().subscribe(result => {
-      this.wpm.wordList = result;
-      this.wordList = this.wpm.wordList;
 
-      this.wpm.init();
+    this.route.queryParams.subscribe(params => {
+      this.language = this.route.snapshot.paramMap.get("language");
+      console.log('LANGUAGE', this.language);
+      switch (this.language) {
+        case 'javascript':
+          this.languageController.getJavascript().subscribe(result => {
+            this.wpm.wordList = result;
+            this.wordList = this.wpm.wordList;
+            this.wpm.init();
+          });
+          break;
+
+        case 'python':
+          this.languageController.getPython().subscribe(result => {
+            this.wpm.wordList = result;
+            this.wordList = this.wpm.wordList;
+            this.wpm.init();
+          });
+          break;
+
+        case 'csharp':
+          this.languageController.getCSharp().subscribe(result => {
+            this.wpm.wordList = result;
+            this.wordList = this.wpm.wordList;
+            this.wpm.init();
+          });
+          break;
+
+        case 'java':
+          this.languageController.getJava().subscribe(result => {
+            this.wpm.wordList = result;
+            this.wordList = this.wpm.wordList;
+            this.wpm.init();
+          });
+          break;
+
+        case 'html':
+          this.languageController.getHtml().subscribe(result => {
+            this.wpm.wordList = result;
+            this.wordList = this.wpm.wordList;
+            this.wpm.init();
+          });
+          break;
+
+        case 'css':
+          this.languageController.getCss().subscribe(result => {
+            this.wpm.wordList = result;
+            this.wordList = this.wpm.wordList;
+            this.wpm.init();
+          });
+          break;
+        default:
+          this.languageController.getJavascript().subscribe(result => {
+            this.wpm.wordList = result;
+            this.wordList = this.wpm.wordList;
+            this.wpm.init();
+          });
+          break;
+      }
     });
   }
 
@@ -147,8 +205,9 @@ export class MainComponent implements OnInit {
     this.finished = true;
     this.count = 60;
 
+    console.log('setResult')
     if (this.userService.getName() !== 'Unknown') {
-      this.userService.sendScore(this.wpm).subscribe(resp => {
+      this.userService.sendScore(this.wpm, this.language).subscribe(resp => {
         console.log(resp)
       });
     }

@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserScore } from '../models/userScore';
+import { LanguageScore } from '../models/languageScore';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class LeaderBoardService {
     private http: HttpClient
   ) { }
 
-  getLeaderBoard = (): Observable<UserScore[]> => {
+  getLeaderBoard = (): Observable<LanguageScore[]> => {
     // const options = { responseType: 'text' as 'json' };
-    return this.http.get<UserScore[]>(`${this.serverUrl}leaderBoard`);
+    return this.http.get<LanguageScore[]>(`${this.serverUrl}leaderBoard`);
   }
 }

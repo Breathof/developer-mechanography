@@ -17,10 +17,14 @@ app.use(bodyParser.json())
 const LanguageController = require('./controller/languageController');
 const LeaderBoardController = require('./controller/leaderBoardController');
 
-app.get('/js', (req, res) => {
+app.get('/test', (req, res) => {
     try {
         res.status = 200;
-        res.json(LanguageController.getLanguage(200));
+        let language = req.query.language;
+
+        console.log(`Requested ${language}`);
+
+        res.json(LanguageController.getLanguage(200, language));
     } catch (error) {
         console.error(error)
     }
@@ -31,7 +35,7 @@ app.get('/leaderBoard', (req, res) => {
         res.status = 200;
         res.json(LeaderBoardController.getLeaderBoard());
         // res.write(res);
-        console.log("Lederboard: ", LeaderBoardController.getLeaderBoard())
+        // console.log("Lederboard: ", LeaderBoardController.getLeaderBoard())
         res.end();
     } catch (error) {
         console.error(error)

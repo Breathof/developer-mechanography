@@ -10,7 +10,7 @@ const routes: Routes = [
   // TODO: loggedUser ? main : landing
   { path: '', component: LandingComponent },
 
-  { path: 'main', component: MainComponent },
+  { path: 'main/:language', component: MainComponent },
   { path: 'landing', component: LandingComponent },
   { path: '**', component: NotFoundComponent }
 ];

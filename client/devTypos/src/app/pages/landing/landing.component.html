@@ -6,12 +6,13 @@
 
 </div>
 <div class="container">
+  <!-- Javascript -->
   <div id="js">
     <mat-card>
       <img mat-card-image src="../../../assets/images/js.png">
       <mat-card-content>
         <mat-list>
-          <mat-list-item *ngFor="let userScore of userScores">
+          <mat-list-item *ngFor="let userScore of javascriptScores">
             <div class="user-name">
               {{userScore.userName}}:
             </div>
@@ -25,35 +26,104 @@
     </mat-card>
   </div>
 
+  <!-- Python -->
   <div id="py">
     <mat-card>
       <img mat-card-image src="../../../assets/images/python.png">
-      <mat-card-content></mat-card-content>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item *ngFor="let userScore of pythonScores">
+            <div class="user-name">
+              {{userScore.userName}}:
+            </div>
+            <div class="wpm">
+              {{userScore.wpm}}
+            </div>
+            <br>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
     </mat-card>
   </div>
+
+  <!-- Java -->
   <div id="java">
     <mat-card>
       <img mat-card-image src="../../../assets/images/java.webp">
-      <mat-card-content></mat-card-content>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item *ngFor="let userScore of javaScores">
+            <div class="user-name">
+              {{userScore.userName}}:
+            </div>
+            <div class="wpm">
+              {{userScore.wpm}}
+            </div>
+            <br>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
 
     </mat-card>
   </div>
+
+  <!-- CSharp -->
   <div id="csharp">
     <mat-card>
       <img mat-card-image src="../../../assets/images/csharp.png">
-      <mat-card-content></mat-card-content>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item *ngFor="let userScore of csharptScores">
+            <div class="user-name">
+              {{userScore.userName}}:
+            </div>
+            <div class="wpm">
+              {{userScore.wpm}}
+            </div>
+            <br>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
     </mat-card>
   </div>
+
+  <!-- Html -->
   <div id="hmtl">
     <mat-card>
       <img mat-card-image src="../../../assets/images/html.png">
-      <mat-card-content></mat-card-content>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item *ngFor="let userScore of htmlScores">
+            <div class="user-name">
+              {{userScore.userName}}:
+            </div>
+            <div class="wpm">
+              {{userScore.wpm}}
+            </div>
+            <br>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
     </mat-card>
   </div>
+
+  <!-- Css -->
   <div id="css">
     <mat-card>
       <img mat-card-image src="../../../assets/images/css.png">
-      <mat-card-content></mat-card-content>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item *ngFor="let userScore of cssScores">
+            <div class="user-name">
+              {{userScore.userName}}:
+            </div>
+            <div class="wpm">
+              {{userScore.wpm}}
+            </div>
+            <br>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
     </mat-card>
   </div>
 

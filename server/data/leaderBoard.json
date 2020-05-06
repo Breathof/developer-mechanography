@@ -1,8 +1,1 @@
-[
-  { "userName": "Clois", "wpm": 35 },
-  { "userName": "Clois", "wpm": 35 },
-  { "userName": "Clois", "wpm": 35 },
-  { "userName": "Clois", "wpm": 35 },
-  { "userName": "Clois", "wpm": 35 },
-  { "userName": "Clois", "wpm": 35 }
-]
+[{"name":"javascript","data":[{"userName":"Clois","wpm":54},{"userName":"Clois","wpm":34},{"userName":"Clois","wpm":34},{"userName":"Clois","wpm":25},{"userName":"Clois","wpm":15},{"userName":"Clois","wpm":5}]},{"name":"python","data":[{"userName":"Clovis","wpm":6.4,"language":"python"}]},{"name":"java","data":[{"userName":"Clovis","wpm":5,"language":"java"}]},{"name":"csharp","data":[{"userName":"Clovis","wpm":7.2,"language":"csharp"}]},{"name":"html","data":[{"userName":"Clovis","wpm":4.4,"language":"html"}]},{"name":"css","data":[{"userName":"Clovis","wpm":4.2,"language":"css"}]}]

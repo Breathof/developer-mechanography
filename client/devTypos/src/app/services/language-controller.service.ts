@@ -12,8 +12,27 @@ export class LanguageControllerService {
   serverUrl = environment.API_URL;
   constructor(private http: HttpClient) { }
 
-  getJS(): Observable<any> {
-    return this.http.get(`${this.serverUrl}js`);
+  getJavascript(): Observable<any> {
+    return this.http.get(`${this.serverUrl}test?language=javascript`);
   }
 
+  getPython(): Observable<any> {
+    return this.http.get(`${this.serverUrl}test?language=python`);
+  }
+
+  getCss(): Observable<any> {
+    return this.http.get(`${this.serverUrl}test?language=css`);
+  }
+
+  getHtml(): Observable<any> {
+    return this.http.get(`${this.serverUrl}test?language=html`);
+  }
+
+  getJava(): Observable<any> {
+    return this.http.get(`${this.serverUrl}test?language=java`);
+  }
+
+  getCSharp(): Observable<any> {
+    return this.http.get(`${this.serverUrl}test?language=csharp`);
+  }
 }

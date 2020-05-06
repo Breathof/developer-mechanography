@@ -6,10 +6,10 @@ let language = [];
 
 app.get('../data/words.json');
 
-const load = () => { language = require('../data/words.json') }
+const load = (languageName) => { language = require(`../data/${languageName}-words.json`) }
 
-const getLanguage = (topNumber) => {
-    load();
+const getLanguage = (topNumber, languageName = 'javascript') => {
+    load(languageName);
     let topResults = new Array();
     language = language.slice(0, topNumber);
     for (let index = 0; index < topNumber; index++) {

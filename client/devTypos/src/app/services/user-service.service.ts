@@ -23,9 +23,9 @@ export class UserServiceService {
 
   getName = (): string => { return this.userName };
 
-  sendScore = (wpm: WordsPerMinute): Observable<any> => {
-    console.log('SEND: ', { "userName": this.userName, "wpm": wpm.getWpm() });
-    return this.http.post(`${this.serverUrl}userScore`, { "userName": this.userName, "wpm": wpm.getWpm() })
+  sendScore = (wpm: WordsPerMinute, language: string): Observable<any> => {
+    console.log('SEND: ', { "userName": this.userName, "wpm": wpm.getWpm(), "language": language });
+    return this.http.post(`${this.serverUrl}userScore`, { "userName": this.userName, "wpm": wpm.getWpm(), "language": language })
   }
 
 }

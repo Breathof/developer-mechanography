@@ -12,14 +12,17 @@ const load = () => { leaderBoard = require('../data/leaderBoard.json') }
 
 const getLeaderBoard = () => {
     load();
-    leaderBoard = leaderBoard.sort((a, b) => a.wpm < b.wpm ? 1 : -1)
+    leaderBoard.forEach(language => language.data.sort((a, b) => a.wpm < b.wpm ? 1 : -1));
     return leaderBoard;
 }
 
 const updateLeaderBoard = (json) => {
     load();
     // json = JSON.parse(JSON.stringify(json));
-    leaderBoard.push(json);
+    let languageLeaderBoard = leaderBoard.find(x => x.name === json.language);
+
+    console.log('languageLeaderBoard ', languageLeaderBoard)
+    languageLeaderBoard.data.push(json);
     fs.writeFile(path.join(__dirname, '../data/leaderBoard.json'), JSON.stringify(leaderBoard), (err, data) => {
         if (err) console.log('error', err);
     });
